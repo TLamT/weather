@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 futureWeather.innerHTML = `<span style="font-size:1.2rem">天氣: ${forecastWeather} 
                 最高溫度: <span style="color:red;font-size:1.5rem">${forecastMaxtemp}</span>°C,
                  最低溫度: <span style="color:blue;font-size:1.5rem">${forecastMintemp}</span>°C,
-                 風向: <span style="color:purple;font-size:1.2rem">${forecastWind}</span>, 
+                 風向: <span style="color:purple;font-size:1.2rem">${forecastWind}</span>
                  <br>
                  濕度:<span style="color:green;font-size:1.2rem"><b>${forecastMinrh}% - ${forecastMaxrh}%</b></span>`;
                 card.appendChild(futureWeather);
