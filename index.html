@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="immediate-weather">
+    </div>
+    <div id="general-weather"></div>
+    <div id="future-weather">
+        <div id="future"></div>
+        <div id="container"></div>
+    </div>
+</body>
+<style>
+    * {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #select {
+        width: 20rem;
+        height: 3rem;
+        font-size: 1.5rem;
+    }
+
+    #immediate-weather,
+    #general-weather,
+    #future-weather {
+        margin: 1rem;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #immediate-weather {
+        background-color: #f9f9f9;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    #general-weather {
+        background-color: #e9f7ef;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    #future-weather {
+        background-color: #fef9e7;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+    }
+
+    #future {
+        font-size: 1.2rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+
+    #container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .card {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        width: 100%;
+        /* 佔滿父元素寬度 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        /* 內部元素間距 */
+    }
+</style>
+
+<script src="index.js"></script>
+
+</html>
