@@ -1,55 +1,37 @@
-# 簡易天氣預報網站
+# ☁️ Real-time Weather Dashboard
 
-這個網站係用三個不同嘅天氣API整合而成，提供用戶最新嘅天氣資訊同九日預測，界面簡單直觀，方便快速查詢。
+A sleek, responsive weather application that provides live weather updates and forecasts by integrating the **OpenWeatherMap API**.
 
-[訪問網站](https://tlamt.github.io/weather/)
-
----
-
-## 核心功能
-
-- 顯示即時天氣狀況
-- 展示未來九日天氣預測（最高溫度、濕度）
-- 每日天氣詳細卡片，內容清晰易讀
-- 使用純HTML、CSS同JavaScript實現，無需額外框架或圖表
+👉 **[Live Demo](https://tlamt.github.io)**
 
 ---
 
-## 使用嘅API
+## 🚀 Engineering Highlights
 
-我依靠三個不同嘅天氣API，來獲取更全面嘅天氣資料：
+*   **RESTful API Integration**: Implemented data fetching from OpenWeatherMap to retrieve real-time temperature, humidity, and wind speed.
+*   **Dynamic Backgrounds**: Developed logic to change UI themes and background images dynamically based on the current weather condition (e.g., Sunny, Rainy, Cloudy).
+*   **Asynchronous Data Handling**: Used **Fetch API** with error handling to manage network requests and invalid city queries.
+*   **Responsive UI**: Optimized for all screen sizes using CSS Media Queries and Flexbox.
 
-1. **天氣API 1**：提供即時天氣狀況（狀態、溫度、濕度）
-2. **天氣API 2**：提供未來九日預測（最高溫度、最低溫度、濕度等）
-3. **天氣API 3**：提供風向、風速、空氣品質等資料
+## 🛠️ Tech Stack
 
-*注意：* 由於API來源不同，資料格式亦各異，喺整合時我會進行資料轉換，保持界面一致。
+*   **Core**: JavaScript (ES6+), HTML5, CSS3
+*   **API**: OpenWeatherMap API
+*   **Icons**: FontAwesome / Weather Icons
+*   **Deployment**: GitHub Pages
 
----
+## 🧠 Key Challenges & Solutions
 
-## 技術細節
+### 1. Handling API Errors
+**Challenge**: Users entering non-existent cities would break the app.
+**Solution**: Implemented a validation layer that catches 404 errors and provides user-friendly feedback instead of crashing the UI.
 
-- **前端技術**：純HTML、CSS、JavaScript
-- **資料獲取**：用`fetch`從API取得資料
-- **資料顯示**：
-  - 動態建立天氣卡片
-  - 每日資訊清楚呈現
-- **樣式設計**：簡單美觀，適合快速瀏覽
+### 2. Unit Conversion
+**Challenge**: API returns data in Kelvin by default.
+**Solution**: Created utility functions to toggle between Metric (Celsius) and Imperial (Fahrenheit) units seamlessly.
 
----
+## 📅 Roadmap
 
-## 使用方法
-
-1. 直接打開網址：[https://tlamt.github.io/weather/](https://tlamt.github.io/weather/)
-2. 等待資料載入，即可查看天氣資訊。
-
-**注意：**  
-- 可能需要在API平台申請API金鑰，並在程式碼中配置。
-- 預設是本地打開，若需連線API請確保CORS問題已解決。
-
----
-
-## 貢獻及聯絡
-
-歡迎提供建議或改進！  
-有任何問題可聯絡我。
+- [ ] **Geolocation**: Auto-detect user's location to provide local weather on load.
+- [ ] **7-Day Forecast**: Expand the UI to display extended weekly data.
+- [ ] **Search History**: Save recently searched cities using **LocalStorage**.
