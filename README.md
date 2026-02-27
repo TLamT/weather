@@ -2,7 +2,7 @@
 
 A sleek, responsive weather application that provides live weather updates and forecasts by integrating the **OpenWeatherMap API**.
 
-👉 **[Live Demo](https://tlamt.github.io)**
+👉 **[Live Demo](https://tlamt.github.io/weather/)**
 
 ---
 
