@@ -10,11 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch(immediateWeatherApiUrl);
             const result = await response.json();
-            console.log(result);
             //溫度
             const temperature = result.temperature;
             const data = temperature.data
-            console.log(data);
 
             const place = data.map(item => item.place);
             const value = data.map(item => item.value);
@@ -38,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 const selectedPlace = this.options[this.selectedIndex].text;
                 temperatureValue.innerHTML = `<span style="color:blue;font-size:1.2rem">地方: ${selectedPlace}, 現時溫度: ${selectedValue}°C</span>`;
             });
-            console.log(place, value);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -47,14 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch(weatherApiUrl);
             const result = await response.json();
-            console.log(result);
             const general = result.generalSituation;
             const future = document.getElementById("future");
             const container = document.getElementById("container");
             future.appendChild(document.createElement("p")).innerHTML = `<span style="color:orange">天氣概況:</span> <br>${general}`;
-            console.log(general);
             const forecast = result.weatherForecast;
-            console.log(forecast);
             forecast.forEach(item => {
                 const card = document.createElement("div");
                 card.className = "card";
@@ -70,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const dateStr = date.substring(0, 8);
                 const formattedDate = `${dateStr.substring(0, 4)}/${dateStr.substring(4, 6)}/${dateStr.substring(6, 8)}`;
 
-                const futureDate = document.createElement("h3")
+                const futureDate = document.createElement("h2")
                 futureDate.textContent = `${formattedDate} ${forecastWeek}`;
                 card.appendChild(futureDate);
                 const futureWeather = document.createElement("p");
@@ -91,18 +85,52 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch(generalWeatherApiUrl);
             const result = await response.json();
-            console.log(result);
             const general = result.generalSituation;
             const forecastPeriod = result.forecastPeriod;
             const forecastDesc = result.forecastDesc;
             const outlook = result.outlook;
             const generalWeather = document.getElementById("general-weather");
             generalWeather.appendChild(document.createElement("p")).innerHTML = `${forecastPeriod} : ${general}<br>${forecastDesc} ${outlook}`;
-            console.log(general);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     }
+    function today() {
+        const today = document.getElementById("today")
+        const week = document.getElementById("week")
+        const time = document.getElementById("time")
+        const now = new Date();
+        
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const date = now.getDate();
+
+        const daysOfWeek = ['日', '一', '二', '三', '四', '五', '六'];
+        const dayOfWeek = daysOfWeek[now.getDay()];
+
+
+        // 定義更新時間的函數
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            today.innerHTML = `今日：${year}年${month}月${date}日`;
+            week.innerHTML = `星期${dayOfWeek}`
+            time.innerHTML = `${hours}:${minutes}:${seconds}`
+        }
+
+        // 初次更新時間
+        updateTime();
+
+        // 每秒更新
+        setInterval(updateTime, 1000);
+
+
+    }
+
+
+    today()
     fetchGeneralWeatherData();
     fetchImmediateWeatherData();
     fetchFutureWeatherData();

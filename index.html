@@ -6,6 +6,10 @@
 </head>
 
 <body>
+    <div id="now">
+        <span id="today"></span><span id="week"></span>
+        <div id="time"></div>
+    </div>
     <div id="immediate-weather">
     </div>
     <div id="general-weather"></div>
@@ -21,7 +25,18 @@
         padding: 0;
         box-sizing: border-box;
     }
-
+    #now{
+        background-color: rgb(189, 177, 169);
+        display: flex;
+        justify-content: space-between;
+        font-size: larger;
+    }
+    #today{
+        color: rgb(226, 75, 75);
+    }
+    #week{
+    color: rgba(0, 0, 255, 0.596);
+    }
     #select {
         width: 20rem;
         height: 3rem;
@@ -30,7 +45,7 @@
 
     #immediate-weather,
     #general-weather,
-    #future-weather {
+    #future-weather,#now {
         margin: 1rem;
         padding: 1rem;
         border: 1px solid #ccc;
