@@ -1,37 +1,36 @@
-# ☁️ Real-time Weather Dashboard
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A sleek, responsive weather application that provides live weather updates and forecasts by integrating the **OpenWeatherMap API**.
+## Getting Started
 
-👉 **[Live Demo](https://tlamt.github.io/weather/)**
+First, run the development server:
 
----
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## 🚀 Engineering Highlights
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-*   **RESTful API Integration**: Implemented data fetching from OpenWeatherMap to retrieve real-time temperature, humidity, and wind speed.
-*   **Dynamic Backgrounds**: Developed logic to change UI themes and background images dynamically based on the current weather condition (e.g., Sunny, Rainy, Cloudy).
-*   **Asynchronous Data Handling**: Used **Fetch API** with error handling to manage network requests and invalid city queries.
-*   **Responsive UI**: Optimized for all screen sizes using CSS Media Queries and Flexbox.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 🛠️ Tech Stack
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-*   **Core**: JavaScript (ES6+), HTML5, CSS3
-*   **API**: OpenWeatherMap API
-*   **Icons**: FontAwesome / Weather Icons
-*   **Deployment**: GitHub Pages
+## Learn More
 
-## 🧠 Key Challenges & Solutions
+To learn more about Next.js, take a look at the following resources:
 
-### 1. Handling API Errors
-**Challenge**: Users entering non-existent cities would break the app.
-**Solution**: Implemented a validation layer that catches 404 errors and provides user-friendly feedback instead of crashing the UI.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### 2. Unit Conversion
-**Challenge**: API returns data in Kelvin by default.
-**Solution**: Created utility functions to toggle between Metric (Celsius) and Imperial (Fahrenheit) units seamlessly.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## 📅 Roadmap
+## Deploy on Vercel
 
-- [ ] **Geolocation**: Auto-detect user's location to provide local weather on load.
-- [ ] **7-Day Forecast**: Expand the UI to display extended weekly data.
-- [ ] **Search History**: Save recently searched cities using **LocalStorage**.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
