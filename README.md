@@ -19,15 +19,6 @@
 - [Lucide Icons](https://lucide.dev)
 - 數據來源：香港天文台 HKO
 
-## 本地開發
-
-```bash
-npm install
-npm run dev
-```
-
-打開 [http://localhost:3000](http://localhost:3000) 即可查看。
-
 ## 線上版本
 
 [https://shadcn-eta-three.vercel.app](https://shadcn-eta-three.vercel.app)
