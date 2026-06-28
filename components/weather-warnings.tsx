@@ -1,37 +1,58 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { TriangleAlert, CloudLightning, Wind, Thermometer, Droplets, Waves, Snowflake, Cloud } from "lucide-react"
+import { TriangleAlert } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { fetchWarnings, type WarningInfo } from "@/lib/weather-api"
 
-const WARNING_META: Record<string, { label: string; icon: typeof TriangleAlert; color: string; bg: string }> = {
-  WTS:       { label: "雷暴警告",       icon: CloudLightning, color: "text-amber-600",  bg: "bg-amber-100 dark:bg-amber-900/30" },
-  WRAIN:     { label: "暴雨警告",       icon: Droplets,       color: "text-blue-600",   bg: "bg-blue-100 dark:bg-blue-900/30" },
-  WHOT:      { label: "酷熱天氣警告",   icon: Thermometer,    color: "text-red-500",    bg: "bg-red-100 dark:bg-red-900/30" },
-  WCOLD:     { label: "寒冷天氣警告",   icon: Snowflake,      color: "text-sky-600",    bg: "bg-sky-100 dark:bg-sky-900/30" },
-  WFIRE:     { label: "火災危險警告",   icon: TriangleAlert,  color: "text-orange-600", bg: "bg-orange-100 dark:bg-orange-900/30" },
-  WFROST:    { label: "霜凍警告",       icon: Snowflake,      color: "text-indigo-500", bg: "bg-indigo-100 dark:bg-indigo-900/30" },
-  WMSGNL:    { label: "強烈季候風信號", icon: Wind,           color: "text-teal-600",   bg: "bg-teal-100 dark:bg-teal-900/30" },
-  WFNTSA:    { label: "新界北水浸報告", icon: Droplets,       color: "text-cyan-600",   bg: "bg-cyan-100 dark:bg-cyan-900/30" },
-  WL:        { label: "山泥傾瀉警告",   icon: Waves,          color: "text-amber-700",  bg: "bg-amber-100 dark:bg-amber-900/30" },
-  WTCSGNL:   { label: "熱帶氣旋警告",   icon: Cloud,          color: "text-yellow-600", bg: "bg-yellow-100 dark:bg-yellow-900/30" },
-  WTMW:      { label: "海嘯警告",       icon: Waves,          color: "text-red-600",    bg: "bg-red-100 dark:bg-red-900/30" },
+const WARNING_ICONS: Record<string, string> = {
+  WTS:    "/warnings/ts.gif",
+  WHOT:   "/warnings/vhot.gif",
+  WCOLD:  "/warnings/cold.gif",
+  WFROST: "/warnings/frost.gif",
+  WMSGNL: "/warnings/sms.gif",
+  WFNTSA: "/warnings/ntfl.gif",
+  WL:     "/warnings/landslip.gif",
+  WTMW:   "/warnings/tsunami-warn.gif",
 }
 
-function getMeta(w: WarningInfo) {
-  const base = WARNING_META[w.code]
-  if (!base) return { label: w.name, icon: TriangleAlert, color: "text-muted-foreground", bg: "bg-muted" }
+function getIcon(w: WarningInfo): string {
+  if (w.code === "WRAIN") {
+    if (w.name.includes("黃")) return "/warnings/raina.gif"
+    if (w.name.includes("紅")) return "/warnings/rainr.gif"
+    return "/warnings/rainb.gif"
+  }
+  if (w.code === "WFIRE") {
+    if (w.name.includes("黃")) return "/warnings/firey.gif"
+    return "/warnings/firer.gif"
+  }
+  if (w.code === "WTCSGNL") {
+    if (w.name.includes("一號")) return "/warnings/tc1.gif"
+    if (w.name.includes("三號")) return "/warnings/tc3.gif"
+    if (w.name.includes("八號")) {
+      if (w.name.includes("東北")) return "/warnings/tc8ne.gif"
+      if (w.name.includes("西北")) return "/warnings/tc8d.gif"
+      if (w.name.includes("東南")) return "/warnings/tc8b.gif"
+      if (w.name.includes("西南")) return "/warnings/tc8c.gif"
+      return "/warnings/tc8ne.gif"
+    }
+    if (w.name.includes("九號")) return "/warnings/tc9.gif"
+    if (w.name.includes("十號")) return "/warnings/tc10.gif"
+    return "/warnings/tc1.gif"
+  }
+  return WARNING_ICONS[w.code] || ""
+}
 
+function getLabel(w: WarningInfo): string {
   if (w.code === "WRAIN") {
     const sub = w.name.includes("黃") ? "黃" : w.name.includes("紅") ? "紅" : "黑"
-    return { ...base, label: `${sub}色暴雨警告` }
+    return `${sub}色暴雨警告`
   }
   if (w.code === "WFIRE") {
     const sub = w.name.includes("黃") ? "黃" : "紅"
-    return { ...base, label: `${sub}色火災危險警告` }
+    return `${sub}色火災危險警告`
   }
-  return base
+  return w.name
 }
 
 function formatTime(t: string) {
@@ -61,14 +82,18 @@ export default function WeatherWarnings() {
     <Card>
       <CardContent className="space-y-2 py-3">
         {warnings.map((w) => {
-          const meta = getMeta(w)
-          const Icon = meta.icon
+          const icon = getIcon(w)
+          const label = getLabel(w)
           return (
             <div key={w.code} className="flex items-center gap-2 text-sm">
-              <div className={`flex size-7 shrink-0 items-center justify-center rounded-full ${meta.bg}`}>
-                <Icon className={`size-3.5 ${meta.color}`} />
+              <div className="flex size-7 shrink-0 items-center justify-center">
+                {icon ? (
+                  <img src={icon} alt={label} className="size-6 object-contain" />
+                ) : (
+                  <TriangleAlert className="size-4 text-muted-foreground" />
+                )}
               </div>
-              <span className="font-medium">{meta.label}</span>
+              <span className="font-medium">{label}</span>
               <span className="text-xs text-muted-foreground">
                 （{formatTime(w.issueTime)} 發出）
               </span>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CalendarDays, CloudRain, CloudSun, Umbrella } from "lucide-react"
+import { CalendarDays, CloudRain, CloudSun } from "lucide-react"
 import {
   Card,
   CardContent,
@@ -40,17 +40,17 @@ function ForecastCard({ day }: { day: ForecastDay }) {
   const psr = PSR_META[day.PSR] ?? { label: day.PSR, color: "text-muted-foreground" }
 
   return (
-    <Card size="sm">
+    <div className="rounded-lg border bg-card p-3 text-card-foreground shadow-xs">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-semibold">
+        <span className="text-sm font-semibold">
           {formatDate(day.forecastDate)} {day.forecastWeek}
         </span>
-        <div className="flex items-center gap-1.5">
-          <div className={`flex items-center gap-1 text-[10px] font-medium ${psr.color}`}>
-            {rainy ? <CloudRain className="size-3" /> : <CloudSun className="size-3" />}
+        <div className="flex items-center gap-2">
+          <div className={`flex items-center gap-1 text-xs font-medium ${psr.color}`}>
+            {rainy ? <CloudRain className="size-4" /> : <CloudSun className="size-4" />}
             <span>{psr.label}</span>
           </div>
-          <Badge variant="secondary" className="text-[10px]">
+          <Badge variant="secondary" className="text-xs px-2 py-0.5">
             {day.forecastWeather}
           </Badge>
         </div>
@@ -66,11 +66,9 @@ function ForecastCard({ day }: { day: ForecastDay }) {
         />
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
         <span>
-          <span className="font-semibold text-blue-600 dark:text-blue-400">
-            {mintemp}°
-          </span>
+          <span className="font-semibold text-blue-600 dark:text-blue-400">{mintemp}°</span>
           /<span className="font-semibold text-red-600 dark:text-red-400">{maxtemp}°</span>C
         </span>
         <span className="hidden sm:inline">·</span>
@@ -83,7 +81,7 @@ function ForecastCard({ day }: { day: ForecastDay }) {
           </span>
         </span>
       </div>
-    </Card>
+    </div>
   )
 }
 
@@ -108,30 +106,30 @@ export default function ForecastList() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center gap-2 pb-3">
-        <div className="flex size-8 items-center justify-center rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
-          <CalendarDays className="size-4" />
-        </div>
-        <CardTitle className="text-sm">九天天氣預報</CardTitle>
+      <CardHeader className="pb-3">
+        <CardTitle className="flex items-center gap-2 text-base">
+          <CalendarDays className="size-5 text-purple-600 dark:text-purple-400" />
+          九天天氣預報
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         {loading && (
           <div className="space-y-3">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-5/6" />
+            <Skeleton className="h-5 w-full" />
+            <Skeleton className="h-5 w-5/6" />
             {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} className="h-24 w-full rounded-lg" />
+              <Skeleton key={i} className="h-28 w-full rounded-lg" />
             ))}
           </div>
         )}
         {error && <p className="text-sm text-destructive">{error}</p>}
         {!loading && !error && (
           <>
-            <p className="text-xs leading-relaxed text-muted-foreground">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               <span className="font-medium text-orange-500">天氣概況：</span>
               {general}
             </p>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {forecast.map((day) => (
                 <ForecastCard key={day.forecastDate} day={day} />
               ))}
