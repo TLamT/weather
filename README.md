@@ -23,11 +23,4 @@
 
 [https://shadcn-eta-three.vercel.app](https://shadcn-eta-three.vercel.app)
 
-## Vercel 部署
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new?repository-url=https://github.com/TLamT/weather)
-
-1. 點撃上方按鈕
-2. 用 GitHub 登入 Vercel
-3. 選擇 `TLamT/weather` 倉庫
-4. 按 Deploy 完成
