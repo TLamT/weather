@@ -28,6 +28,10 @@ npm run dev
 
 打開 [http://localhost:3000](http://localhost:3000) 即可查看。
 
+## 線上版本
+
+[https://shadcn-eta-three.vercel.app](https://shadcn-eta-three.vercel.app)
+
 ## Vercel 部署
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new?repository-url=https://github.com/TLamT/weather)
